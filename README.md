@@ -2,6 +2,8 @@
 
 A GitHub Action that reports deployment status to [GoGitCMS](https://gogitcms.com) via the generic webhook provider. 
 
+## Usage
+
 Use it to track deployments from any CI/CD pipeline — Netlify, Railway, Render, custom scripts, or anything else that runs in GitHub Actions.
 
 ## Quick Start
