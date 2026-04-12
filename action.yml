@@ -22,7 +22,7 @@ inputs:
     required: false
     default: ""
   job-status:
-    description: "Pass ${{ job.status }} here so the action can auto-derive the CMS status when `status` is omitted. GitHub does not expose job.status as an env var, so it must be passed explicitly."
+    description: "Pass the job.status context so the action can auto-derive the CMS status when status is omitted. GitHub does not expose job.status as an env var, so it must be passed explicitly."
     required: false
     default: ""
   deployment-url:
