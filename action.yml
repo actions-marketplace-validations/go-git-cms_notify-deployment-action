@@ -1,5 +1,5 @@
 name: "GoGitCMS Notify Deployment"
-description: "Report deployment status to GoGitCMS via the generic webhook provider. Supports automatic status derivation, idempotent deployment IDs, and structured error extraction."
+description: "Report deployment status to GoGitCMS via the generic webhook provider."
 branding:
   icon: "upload-cloud"
   color: "blue"
