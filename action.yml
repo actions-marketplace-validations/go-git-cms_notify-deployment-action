@@ -1,0 +1,47 @@
+name: "GoGitCMS Notify Deployment"
+description: "Report deployment status to GoGitCMS via the generic webhook provider. Supports automatic status derivation, idempotent deployment IDs, and structured error extraction."
+branding:
+  icon: "upload-cloud"
+  color: "blue"
+
+inputs:
+  cms-url:
+    description: "Base URL of the CMS instance (e.g. https://cms.example.com)"
+    required: true
+  provider-id:
+    description: "The deployment_providers.id of the webhook provider record"
+    required: true
+  webhook-secret:
+    description: "The Bearer token secret for the provider. Store as a GitHub Actions secret."
+    required: true
+  project-id:
+    description: "The ExternalProjectID configured in the DeploymentProject mapping"
+    required: true
+  status:
+    description: "Override the deployment status. If omitted, derived from job.status (success→ready, failure→error, cancelled→cancelled, running→building)"
+    required: false
+    default: ""
+  deployment-url:
+    description: "Preview or production URL to associate with the deployment"
+    required: false
+    default: ""
+  ref:
+    description: "Override the branch name. Defaults to GITHUB_HEAD_REF (PRs) or GITHUB_REF_NAME (push)"
+    required: false
+    default: ""
+  deployment-type:
+    description: "The Name of the DeploymentProject to target. Required for multi-project monorepo setups; omit for single-project repos."
+    required: false
+    default: ""
+  error-message:
+    description: "Custom error message to include when status is error. Appended alongside the automatic Actions run URL."
+    required: false
+    default: ""
+
+outputs:
+  deployment-id:
+    description: "The ExternalDeploymentID sent to the CMS — derived from the GitHub run ID and attempt number"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"

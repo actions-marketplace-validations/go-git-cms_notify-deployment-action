@@ -1,0 +1,20 @@
+{
+  "name": "@gogitcms/notify-deployment-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GitHub Action to report deployment status to GoGitCMS",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/index.ts -o dist --minify",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.3",
+    "typescript": "^5.7.0",
+    "@types/node": "^20.17.0"
+  }
+}
