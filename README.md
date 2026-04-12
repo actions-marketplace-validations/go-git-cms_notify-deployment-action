@@ -18,7 +18,7 @@ jobs:
 
       - name: Notify GoGitCMS
         if: always()
-        uses: go-git-cms/notify-deployment-action@v1
+        uses: go-git-cms/notify-deployment-action@v1.0.0
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -126,7 +126,7 @@ jobs:
 
       - name: Notify CMS
         if: always()
-        uses: go-git-cms/notify-deployment-action@v1
+        uses: go-git-cms/notify-deployment-action@v1.0.0
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -147,7 +147,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Notify CMS — building
-        uses: go-git-cms/notify-deployment-action@v1
+        uses: go-git-cms/notify-deployment-action@v1.0.0
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -160,7 +160,7 @@ jobs:
 
       - name: Notify CMS — final status
         if: always()
-        uses: go-git-cms/notify-deployment-action@v1
+        uses: go-git-cms/notify-deployment-action@v1.0.0
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -188,7 +188,7 @@ jobs:
 
       - name: Notify CMS — ${{ matrix.app }}
         if: always()
-        uses: go-git-cms/notify-deployment-action@v1
+        uses: go-git-cms/notify-deployment-action@v1.0.0
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -221,7 +221,7 @@ jobs:
 
       - name: Notify CMS
         if: always()
-        uses: go-git-cms/notify-deployment-action@v1
+        uses: go-git-cms/notify-deployment-action@v1.0.0
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
