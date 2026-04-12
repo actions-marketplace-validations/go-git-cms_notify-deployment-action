@@ -18,7 +18,7 @@ jobs:
 
       - name: Notify GoGitCMS
         if: always()
-        uses: go-git-cms/go-git-cms/.github/actions/notify-deployment@main
+        uses: go-git-cms/notify-deployment-action@v1
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -126,7 +126,7 @@ jobs:
 
       - name: Notify CMS
         if: always()
-        uses: go-git-cms/go-git-cms/.github/actions/notify-deployment@main
+        uses: go-git-cms/notify-deployment-action@v1
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -147,7 +147,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Notify CMS — building
-        uses: go-git-cms/go-git-cms/.github/actions/notify-deployment@main
+        uses: go-git-cms/notify-deployment-action@v1
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -160,7 +160,7 @@ jobs:
 
       - name: Notify CMS — final status
         if: always()
-        uses: go-git-cms/go-git-cms/.github/actions/notify-deployment@main
+        uses: go-git-cms/notify-deployment-action@v1
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -188,7 +188,7 @@ jobs:
 
       - name: Notify CMS — ${{ matrix.app }}
         if: always()
-        uses: go-git-cms/go-git-cms/.github/actions/notify-deployment@main
+        uses: go-git-cms/notify-deployment-action@v1
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -221,7 +221,7 @@ jobs:
 
       - name: Notify CMS
         if: always()
-        uses: go-git-cms/go-git-cms/.github/actions/notify-deployment@main
+        uses: go-git-cms/notify-deployment-action@v1
         with:
           cms-url: ${{ vars.CMS_URL }}
           provider-id: ${{ vars.CMS_PROVIDER_ID }}
@@ -252,14 +252,3 @@ Content-Type: application/json
 ```
 
 The CMS server validates the Bearer token, looks up the deployment project mapping, resolves the branch, and enqueues a background job that upserts a `Deployment` row and publishes a real-time event to any subscribed Studio clients.
-
-## Development
-
-```bash
-cd packages/notify-deployment
-npm install
-npm run typecheck   # type-check without emitting
-npm run build       # bundle with ncc → dist/index.js
-```
-
-The compiled `dist/index.js` must be committed. GitHub Actions runs it directly — there is no `npm install` step at action call time.
