@@ -6,18 +6,14 @@ import * as github from "@actions/github";
 // ---------------------------------------------------------------------------
 
 /**
- * Maps GitHub's job status (available as `job.status` at step runtime) to
- * the CMS canonical deployment status. When the action is called mid-job
- * (e.g. with `status: building`) the caller passes an explicit override and
- * this function is not consulted.
+ * Maps a GitHub job status string to the CMS canonical deployment status.
+ *
+ * `job.status` is only available as a workflow expression (`${{ job.status }}`),
+ * NOT as a Node.js environment variable. Callers should pass it explicitly
+ * via the `job-status` input so that auto-derivation works.
  */
-function deriveStatus(): string {
-  // GitHub injects `job.status` into the step's environment. The GitHub
-  // Actions toolkit exposes it as the GITHUB_JOB_STATUS env var. At step
-  // runtime the value is one of: success, failure, cancelled.
-  // When running _during_ the job (not in a post-step) it may not be set;
-  // in that case we treat it as "building" since the job is still running.
-  const jobStatus = process.env.GITHUB_JOB_STATUS || "";
+function deriveStatus(jobStatusInput: string): string {
+  const jobStatus = jobStatusInput || "";
   switch (jobStatus.toLowerCase()) {
     case "success":
       return "ready";
@@ -106,13 +102,14 @@ async function run(): Promise<void> {
     const webhookSecret = core.getInput("webhook-secret", { required: true });
     const projectId = core.getInput("project-id", { required: true });
     const statusInput = core.getInput("status");
+    const jobStatusInput = core.getInput("job-status");
     const deploymentUrl = core.getInput("deployment-url");
     const refInput = core.getInput("ref");
     const deploymentType = core.getInput("deployment-type");
     const errorMessage = core.getInput("error-message");
 
     // Derive values
-    const status = statusInput || deriveStatus();
+    const status = statusInput || deriveStatus(jobStatusInput);
     const branch = resolveBranch(refInput);
     const commit = process.env.GITHUB_SHA || "";
     const deploymentId = deriveDeploymentId();

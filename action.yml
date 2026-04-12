@@ -18,7 +18,11 @@ inputs:
     description: "The ExternalProjectID configured in the DeploymentProject mapping"
     required: true
   status:
-    description: "Override the deployment status. If omitted, derived from job.status (success→ready, failure→error, cancelled→cancelled, running→building)"
+    description: "Override the deployment status. If omitted, derived from job-status (success→ready, failure→error, cancelled→cancelled, otherwise→building)"
+    required: false
+    default: ""
+  job-status:
+    description: "Pass ${{ job.status }} here so the action can auto-derive the CMS status when `status` is omitted. GitHub does not expose job.status as an env var, so it must be passed explicitly."
     required: false
     default: ""
   deployment-url:
